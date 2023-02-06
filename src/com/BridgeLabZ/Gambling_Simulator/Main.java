@@ -3,6 +3,36 @@ package com.BridgeLabZ.Gambling_Simulator;
 import java.util.Scanner;
 
 public class Main {
+
+    static void gamble(int noOfTimes, int $Stack, int $Goal) {
+        int bets = 0; // total number of bets made
+        int wins = 0; // total number of games won
+
+        for (int i = 0; i < noOfTimes; i++) {
+            int cash = $Stack;
+
+            while (cash > 0 && cash < $Goal) {
+                bets++;
+
+                if (Math.random() < 0.5)
+                    cash++; // win $1
+                else
+                    cash--; // lose $1
+            }
+            if (cash == $Goal)
+                wins++; // to find no. of wins
+
+        }
+        // print results
+        System.out.println();
+        System.out.println(wins + " wins out of of " + noOfTimes);
+        double perWon=100.0 * wins / noOfTimes;
+        double perLoss= 100.0 * (noOfTimes - wins) / noOfTimes;
+        System.out.println("Percent of games won = " + perWon);
+        System.out.println("Percent of games lost = " +perLoss);
+        System.out.println("Total bets in " + noOfTimes + " games = " + bets);
+
+    }
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         int n, $stack, $goal;
@@ -18,7 +48,9 @@ public class Main {
         }*/
         System.out.println("As a Gambler make $1 bet so either win or loose $1:");
         $stack = sc.nextInt();
-
+        System.out.println("enter goal amount");
+        $goal = sc.nextInt();
+        gamble(1, $stack, $goal);
 
     }
 }
