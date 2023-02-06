@@ -50,7 +50,7 @@ public class Main {
         $stack = sc.nextInt();
         System.out.println("enter goal amount");
         $goal = sc.nextInt();
-        gamble(1, $stack, $goal);
+        gamble(20, $stack, $goal);
 
     }
 }
