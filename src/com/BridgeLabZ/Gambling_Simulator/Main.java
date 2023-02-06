@@ -3,6 +3,7 @@ package com.BridgeLabZ.Gambling_Simulator;
 import java.util.Scanner;
 
 public class Main {
+    static int counter = 2;
 
     static void gamble(int noOfTimes, int $Stack, int $Goal) {
         int bets = 0; // total number of bets made
@@ -26,15 +27,30 @@ public class Main {
         // print results
         System.out.println();
         System.out.println(wins + " wins out of of " + noOfTimes);
-        double perWon=100.0 * wins / noOfTimes;
-        double perLoss= 100.0 * (noOfTimes - wins) / noOfTimes;
+        double perWon = 100.0 * wins / noOfTimes;
+        double perLoss = 100.0 * (noOfTimes - wins) / noOfTimes;
         System.out.println("Percent of games won = " + perWon);
-        System.out.println("Percent of games lost = " +perLoss);
+        System.out.println("Percent of games lost = " + perLoss);
         System.out.println("Total bets in " + noOfTimes + " games = " + bets);
 
     }
+
+    static boolean isLuckyDay(int n) {
+
+            if (counter > n)
+                return true;
+            if (n % counter == 0)
+                return false;
+            int next_position = n - (n / counter);   /*calculate next position of input no.Variable "next_position" is just for
+        readability of the program we can remove it and update in "n" only */
+            counter++;
+            return isLuckyDay(next_position);
+
+
+    }
+
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int n, $stack, $goal;
        /* System.out.println("As a Gambler, would start with a stake of $100 every day and bet $1 every game. If Yes then type Yes else No type:");
         String answer= sc.next();
@@ -48,9 +64,15 @@ public class Main {
         }*/
         System.out.println("As a Gambler make $1 bet so either win or loose $1:");
         $stack = sc.nextInt();
-        System.out.println("enter goal amount");
+        System.out.println("Enter the goal amount");
         $goal = sc.nextInt();
-        gamble(30, $stack, $goal);
+        System.out.println("Enter the no of days");
+         n= sc.nextInt();
+        gamble(n, $stack, $goal);
+        if (isLuckyDay(n))
+            System.out.println(n + " is a lucky days.");
+        else
+            System.out.println(n + " is not a lucky days.");
 
     }
 }
